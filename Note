@@ -1,0 +1,26 @@
+<div class="col-12 col-lg-6" id="Vcam_">
+                    <div class="card mb-4 mb-lg-4 border-light shadow-sm">
+                        <a href="/frontend/html/produit_page.html">
+                            <img src="" alt="Caméra vintage " class="card-img-top" id="Vcam_">
+                        </a>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h5>
+                                    
+                                </h5>
+                            </div>
+                            <div class="card-description">
+                                <p class="text-truncate">
+                                    
+                                </p>
+                            </div>
+                            <div class="card-foot">
+                                <p class="price" id="Vcam_" >
+                                    
+                                </p>
+                                <a href="test_page.html?_id=" class="btn btn-secondary" >Voir test</a>
+                                <a href="/frontend/html/produit_page.html" class="btn btn-secondary">Voir produit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
