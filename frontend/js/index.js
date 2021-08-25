@@ -3,10 +3,10 @@ const url_api = 'http://localhost:3000/api/cameras/';
 var urlApi = document.location.search;
 const idApi_url = urlApi.replace('?_id=','');
 
-function convertPrice(numD) { //Fonction permettant de mettre un nombre sous le format "XXX,XX €"
-    let numC = numD / 100;
-    let numF = numC.toFixed(2);
-    return numF + " €" 
+function convertPrice(nbD) { //Fonction permettant de mettre un nombre sous le format "XXX,XX €"
+    let nbC = nbD / 100;
+    let nbF = nbC.toFixed(2);
+    return nbF + " €" 
 }
 
 function createProduct(number){ // Fonction qui crée un bloc produit, "number" est la variable permettant de localiser le produit dans l'api     
@@ -17,7 +17,7 @@ function createProduct(number){ // Fonction qui crée un bloc produit, "number" 
     <div class="col-12 col-lg-6" class="Vcam">
         <div class="card mb-4 mb-lg-4 border-light shadow-sm">
             <a href="/frontend/html/produit_page.html">
-                <img src="${data[number].imageUrl}" alt="Caméra vintage " class="card-img-top" id="Vcam_">
+                <img src="${data[number].imageUrl}" alt="Caméra vintage " class="card-img-top" id="Vcam_${number + 1}_img">
             </a>
             <div class="card-body">
                 <div class="card-title">
@@ -31,11 +31,11 @@ function createProduct(number){ // Fonction qui crée un bloc produit, "number" 
                     </p>
                 </div>
                 <div class="card-foot">
-                    <p class="price" id="Vcam_" >
+                    <p class="price" id="Vcam_${number + 1}" >
                         ${convertPrice(data[number].price)}
                     </p>
                     <a href="test_page.html?_id=${data[number]._id}" class="btn btn-secondary" >Voir test</a>
-                    <a href="/frontend/html/produit_page.html" class="btn btn-secondary">Voir produit</a>
+                    <a href="/frontend/html/produit_page.html?_id=${data[number]._id}" class="btn btn-secondary">Voir produit</a>
                 </div>
             </div>
         </div>

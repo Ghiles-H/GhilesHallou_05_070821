@@ -12,11 +12,11 @@
           justify-content: space-between;
 }
 
-#product .product_img {
+#product #product_img {
   border: 5px none red;
 }
 
-#product .product_info {
+#product #product_info {
   border: 5px none green;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -28,9 +28,14 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin: 10px;
 }
 
-#product .product_foot {
+#product #product_info #nameProduct {
+  text-align: center;
+}
+
+#product #product_foot {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

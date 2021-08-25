@@ -2,9 +2,8 @@ const nom = document.getElementById('name');
 const prix = document.getElementById('price');
 const description = document.getElementById('descript');
 const img_link = document.getElementById('img');
-const lenses = document.getElementById('lenses_select')
+const lenses = document.getElementById('lenses_select');
 var urlApi = document.location.search;
-const idApi_url = urlApi.replace('?_id=','');
 const url_api_id = 'http://localhost:3000/api/cameras/' + urlApi.replace('?_id=','');
 const url_api = 'http://localhost:3000/api/cameras/';
 
@@ -14,7 +13,7 @@ function toto(){
 }
 fetch(url_api_id)
     .then(res => res.json())
-    .then(data => prix.innerHTML = "Cette caméra est au prix de " + data.price/100 + ",00€");
+    .then(data => prix.innerHTML = "Cette caméra est au prix de " + data.price/100 + ",00€")
 
 fetch(url_api_id)
     .then(res => res.json())
@@ -38,14 +37,19 @@ lenses_option();
 
 fetch(url_api_id)
     .then(res => res.json())
-    .then(data => createProductPage(data))
+    .then(data => createProduct(data))
+    .catch
 
-function createProductPage(data) {
+function createProduct(data) {
     let part = document.getElementById('partTwo');
     let newTitle = document.createElement('h1');
+    newTitle.className = "title";
     let newDescript = document.createElement('p');
+    newDescript.className = "description";
     let newImg = document.createElement('img');
+    newImg.className = "image";
     let newPrice = document.createElement('p');
+    newPrice.className = "price";
     newTitle.textContent = data.name;
     newDescript.textContent = data.description;
     newImg.src = data.imageUrl;

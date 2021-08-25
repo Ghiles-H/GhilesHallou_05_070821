@@ -4,19 +4,24 @@
     flex-direction: row;
     justify-content: space-between;
 
-    .product_img{
+    #product_img{
         border: 5px none red;
     }
-    .product_info{
+    #product_info{
         border: 5px none green;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin: 10px;
+
+        #nameProduct{
+            text-align: center;
+        }
     }
-    .product_foot{
+    #product_foot{
         display: flex;
         flex-direction: row;
         justify-content: space-around;
-        
     }
 }
+
