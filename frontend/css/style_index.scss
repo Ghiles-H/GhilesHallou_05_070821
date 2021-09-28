@@ -1,3 +1,10 @@
+/* Variables colors */
+$ori_pink: #F3E9F0;
+$ori_orange: #E68F2A;
+$ori_purple: #8F5BFA;
+/* Variables colors - END */
+
+
 .card-foot{
     display: flex;
     flex-direction: row;
@@ -9,4 +16,49 @@
 .btn{
     padding-top: 10px!important;
     padding-bottom: 2px!important;
+    background: linear-gradient(135deg, $ori_orange, $ori_purple );
+    &:hover{
+        font-size: 20px !important;
+    }
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+}
+
+.jumbotron{
+    background-color: $ori_pink !important;
+    margin-top: 32px;
+    .title, .title_com{
+        text-align: center !important;
+    }
+}
+header{
+    background-color: $ori_pink;
+}
+ul{
+    position: relative;
+    li{
+        display: inline;
+        position: absolute;
+        a{
+            font-size: 25px;
+            color: black;
+            &:hover{
+                text-decoration: none;
+                color: $ori_purple;
+            }
+        }
+    }
+} 
+
+
+#shop{
+    left: 10rem;
+}
+
+.card-body{
+    background-color: $ori_pink;
 }

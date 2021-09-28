@@ -1,0 +1,106 @@
+@charset "UTF-8";
+/* Variables colors */
+/* Variables colors - END */
+#formulaire {
+  border: black none 1px;
+  border-radius: 25px;
+  padding: 1.5rem;
+  background-color: #F3E9F0;
+}
+
+form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.input_div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.start_payment {
+  background: linear-gradient(135deg, #E68F2A, #8F5BFA);
+  width: 195px;
+  height: 50px;
+  margin-top: 10px;
+}
+
+.panier_container {
+  border: black none 1px;
+  border-radius: 25px;
+  padding: 1.5rem;
+  margin: 1rem;
+  background-color: #F3E9F0;
+}
+
+.panier_container table {
+  background-color: white;
+  border-collapse: collapse;
+  /* Les bordures du tableau seront collées (plus joli) */
+  width: 100%;
+}
+
+.panier_container table td, .panier_container table th {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.panier_container table .vide {
+  background-color: #F3E9F0;
+  border: none;
+}
+
+.far {
+  color: red;
+}
+
+header {
+  background-color: #F3E9F0;
+}
+
+ul {
+  position: relative;
+}
+
+ul li {
+  display: inline;
+  position: absolute;
+}
+
+ul li a {
+  font-size: 25px;
+  color: black;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+#shop {
+  left: 10rem;
+}
+
+.jumbotron {
+  background-color: #F3E9F0 !important;
+  margin-top: 32px;
+}
+
+.jumbotron .title, .jumbotron .title_com {
+  text-align: center !important;
+}
+/*# sourceMappingURL=style_panier.css.map */

@@ -1,3 +1,5 @@
+/* Variables colors */
+/* Variables colors - END */
 .card-foot {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -18,5 +20,64 @@
 .btn {
   padding-top: 10px !important;
   padding-bottom: 2px !important;
+  background: linear-gradient(135deg, #E68F2A, #8F5BFA);
+}
+
+.btn:hover {
+  font-size: 20px !important;
+}
+
+ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  position: relative;
+}
+
+.jumbotron {
+  background-color: #F3E9F0 !important;
+  margin-top: 32px;
+}
+
+.jumbotron .title, .jumbotron .title_com {
+  text-align: center !important;
+}
+
+header {
+  background-color: #F3E9F0;
+}
+
+ul {
+  position: relative;
+}
+
+ul li {
+  display: inline;
+  position: absolute;
+}
+
+ul li a {
+  font-size: 25px;
+  color: black;
+}
+
+ul li a:hover {
+  text-decoration: none;
+  color: #8F5BFA;
+}
+
+#shop {
+  left: 10rem;
+}
+
+.card-body {
+  background-color: #F3E9F0;
 }
 /*# sourceMappingURL=style_index.css.map */

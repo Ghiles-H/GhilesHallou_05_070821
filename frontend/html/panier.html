@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+
+        <meta charset="utf-8">
+        <link rel ="stylesheet" href="/frontend/css/style_panier.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <!-- Font-awesome link -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        
+        <title>Orinoco | Panier</title>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="row">
+                    <nav class="col navbar navbar-expand-lg navbar-dark">
+                        <img src="/backend/images/ori_logo.png" width="200" height="100" alt="Logo Site">
+                        <ul>
+                            <li id="accueil"><a href="/index.html">Accueil</a></li>
+                            <li id="shop"><a href="/frontend/html/panier.html" id="shop_link">Panier</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- Header - END -->
+        <!-- Contenu de la page -->
+        <section class="container">
+            <!-- En-tête -->
+            <!-- <div class="jumbotron">
+                <h1 class="title">
+                    Bienvenu sur Orinoco
+                </h1>
+                <h3 class="title_com">
+                    Voici le contenu actuel de votre panier
+                </h3>
+            </div> -->
+            <!-- En-tête - END -->
+            <!-- Produits ajouer au panier -->
+            <div class="panier_container" >
+                <h2>Votre panier</h2>
+                <input type='hidden' value='' id='ref_id_btn'>
+                <table>
+                 
+                    <thead> <!-- En-tête du tableau -->
+                        <tr id="tab-head">
+                            <th>Produit </th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                            <th>Total</th>
+                            <th class="vide"></th>
+                        </tr>
+                    </thead>
+                 
+                    <tfoot> <!-- Pied de tableau -->
+                        <tr>
+                            <th colspan="2">Total</th>
+                            <th colspan="2" id="total">0.00€</th>
+                            <th class="vide"></th>
+                        </tr>
+                    </tfoot>
+                 
+                    <tbody id="data_panier"> <!-- Corps du tableau -->
+                    </tbody>
+                 </table>
+
+            </div>
+            <!-- Produits ajouer au panier - END -->
+            <!-- Formulaire -->
+            <div id="formulaire">
+                <h2>Passer commande</h2>
+                <form action="/frontend/html/confirm_page.html" method="post">
+                    <div class="input_div">
+                        <label for="lastName">Nom</label>
+                        <input type="text" id="lastName" name="client_last_name" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="firstName">Prenom</label>
+                        <input type="text" id="firstName" name="client_first_name" size="25" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="mail">E-mail</label>
+                        <input type="email" id="mail" name="client_mail" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="phone">Téléphone</label>
+                        <input type="number" id="phone" name="client_phone" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="address">Adresse</label>
+                        <input type="text" id="address" name="client_adress" size="50" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="zipCode">Code postal</label>
+                        <input type="number" id="zipCode" name="client_zip_code" required>
+                    </div>
+                    <div class="input_div">
+                        <label for="city">Ville</label>
+                        <input type="text" id="city" name="client_city"  required>
+                    </div>
+                    
+                    
+                </form>
+                <button class="start_payment btn btn-secondary" onclick="displayFinal()">Procéder au paiement</button>
+                <!-- <a href="/test_page.html" class="btn btn-secondary">Voir produit</a> -->
+            </div>
+            <!-- Formulaire - END -->
+        </section>
+    </body>
+    <script src="/frontend/js/panier.js"></script>
+</html>

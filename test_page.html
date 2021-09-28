@@ -2,6 +2,8 @@
 <html>
     <head>
         <link rel ="stylesheet" href="/frontend/css/style-test.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+
     </head>
     <body>
         <header></header>
@@ -25,6 +27,15 @@
         <div class="SndPart" id="partTwo">
 
         </div>
+        <!-- 3rd Part JS -->
+       
+        <button name='good' onclick="document.getElementById('ref_id_bouton').value=this.name;btnTest()">hello</button>
+
+
+        <!-- <input type='button' value='hello' name='b1' onclick="document.getElementById('ref_id_bouton').value=this.name;"> -->
+        <input type='hidden' value='' id='ref_id_bouton'>
+        <i class="far fa-trash-alt"></i>
+        <input type='button' value='voir' onclick="alert(document.getElementById('ref_id_bouton').value)">
     </body>
     <script src="/frontend/js/function.js"></script>
 </html>

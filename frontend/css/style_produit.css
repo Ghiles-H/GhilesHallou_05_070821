@@ -1,5 +1,14 @@
+/* Variables colors */
+/* Variables colors - END */
+#test-bg {
+  background-color: #F3E9F0;
+}
+
 #product {
-  border: 5px none blue;
+  border: 1px none blue;
+  height: 350px;
+  border-radius: 25px;
+  margin-top: 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10,10 +19,18 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  background-color: #F3E9F0;
 }
 
 #product #product_img {
-  border: 5px none red;
+  width: 500px;
+}
+
+#product #imageProduct {
+  border: 25px none #F3E9F0;
+  width: 450px;
+  height: 300px;
+  margin: 25px;
 }
 
 #product #product_info {
@@ -35,7 +52,7 @@
   text-align: center;
 }
 
-#product #product_foot {
+#product #product_info #descrip_lenses {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -45,5 +62,72 @@
           flex-direction: row;
   -ms-flex-pack: distribute;
       justify-content: space-around;
+  margin-left: 1rem;
+}
+
+#product #product_info #descrip_lenses #descriptionProduct {
+  width: 50%;
+}
+
+#product #product_info #descrip_lenses #product_lenses {
+  margin-left: 2.5rem;
+}
+
+#product #product_info #descrip_lenses #product_lenses #lenses_link {
+  color: black;
+}
+
+#product #product_info #descrip_lenses #product_lenses #lenses_link:hover {
+  color: #8F5BFA;
+}
+
+#product #product_info #product_foot {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+#product #product_info #product_foot #priceProduct {
+  font-weight: bold;
+  font-size: xx-large;
+}
+
+#product #product_info #product_foot .add_shop {
+  background: linear-gradient(135deg, #E68F2A, #8F5BFA);
+  width: 195px;
+  height: 50px;
+}
+
+header {
+  background-color: #F3E9F0;
+}
+
+ul {
+  position: relative;
+}
+
+ul li {
+  display: inline;
+  position: absolute;
+}
+
+ul li a {
+  font-size: 25px;
+  color: black;
+}
+
+ul li a:hover {
+  text-decoration: none;
+  color: #E68F2A;
+}
+
+#shop {
+  left: 10rem;
 }
 /*# sourceMappingURL=style_produit.css.map */
