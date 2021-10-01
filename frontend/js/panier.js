@@ -1,6 +1,7 @@
 const productPanier = document.querySelector('#data_panier');
 const totalPanier = document.querySelector('#total');
 let hiddenBtn = document.querySelector('#ref_id_btn');
+const url_api = 'http://localhost:3000/api/cameras/order';
 let nbn = 1;
 function convertPrice(nbD) { //Fonction permettant de mettre un nombre sous le format "XXX,XX €"
     let nbC = nbD / 100;
@@ -34,71 +35,81 @@ function testConfirmDelete()  {
     }
     history.go(0);
 }
+//createNode
+//Créer un noeud, le supprimer, le modifier, l'insérer dans le dom
+//.append
+
 function displayProduct(){      //Fonction permettant de récupérer les données des articles ajoutés au localstorage et de les afficher sur la page du panier
-    let items = localStorage.getItem('product');
+    let items = JSON.parse(localStorage.getItem('product'));
     let totalVar = 0;
-    items = JSON.parse(items);
     items = items.map((item) => item.n ? item : ({...item, n: 1}));
     let str = "";
     for(let i = 0; i < items.length; i++){
+        console.log(typeof items[i].n)
         str += `
             <tr>
                 <td>${items[i].name}</td>
                 <td><select name="quantity" id="select_${i}">
-                        <option value="1" >1</option>
-                        <option value="2" >2</option>
-                        <option value="3" ${items[i].n === 3 ? "selected" : ""} >3</option>
+                        <option value="1" ${items[i].n === "1" ? "selected" : ""} >1</option>
+                        <option value="2" ${items[i].n === "2" ? "selected" : ""} >2</option>
+                        <option value="3" ${items[i].n === "3" ? "selected" : ""} >3</option>
                     </select>
                 </td>
                 <td>${convertPrice(items[i].price)}</td>
-                <td>${convertPrice(items[i].price * items[i].n)}</td>
+                <td>${convertPrice(items[i].price * Number(items[i].n))}</td>
                 <td><button name='${i}' onclick="document.getElementById('ref_id_btn').value=this.name; testConfirmDelete();"><i class="far fa-trash-alt"></i></button></td>
             </tr>`;   
-        totalVar += items[i].price;
+        totalVar += items[i].price * Number(items[i].n);
     }
     productPanier.innerHTML = str;
+
     totalPanier.innerHTML = convertPrice(totalVar);
 }
-const validInput = (abc) => {
-    if(abc.value == ""){
-        abc.style.borderColor = 'red';
-        abc.style.borderWidth = '3px';
+const validInput = (abc) => {   //Fonction permettant de si un Input est vide ou non
+    if(abc == ""){
         return false;
     }else{
-        abc.style.borderColor = 'black';
-        abc.style.borderWidth = '1px';
         return true;
     }
 }
-const validEmail = (mail) => {
-    let bool = false;
+
+const validEmailA = (mail) => {
+    console.log("log validEmail= ",/\S+@\S+\. \S+/.test(mail));
+    return /\S+@\S+\.\S+/.test(mail);
+}
+const validEmail = (mail) => {  //Fonction permettant de vérifier si l'input mail entré par le user contient un "@" et un "."
     if(validInput(mail)){
-        if(mail.value.includes("@") && mail.value.includes(".")){
-            bool = true;
+        if(mail.includes("@") && mail.includes(".")){
+            return true
         }else{
-            mail.style.borderColor = 'red';
-            mail.style.borderWidth = '3px';
+            return false
+        }
+    }else{
+        return false
+    }
+}
+const validChamps = (order) => {
+    let champs = [order.contact.lastName, order.contact.firstName, order.contact.address, order.contact.city];
+    let i = 0;
+    let bool = true;
+    while(i < 4 && bool == true){
+        if(validInput(champs[i]) == true){
+            console.log(i + " " + champs[i]);
+            i++
+        }else{
+            bool = false;
         }
     }
+    console.log("boolNoMail= ",bool);
+    console.log("mailInput= ", order.contact.email);
+    console.log("mail= ", validEmail(order.contact.email));
+    if(bool == true && validEmail(order.contact.email) == false){
+        bool = false;
+    }
+    console.log("boolFinal= ",bool);
     return bool;
 }
-const inputFetch = () => {
-    let firstName = document.querySelector('#firstName');
-    let lastName = document.querySelector('#lastName');
-    let address = document.querySelector('#address');
-    let city = document.querySelector('#city');
-    let mail = document.querySelector('#mail');
-    const validFirstName = validInput(firstName);
-    const validLastName = validInput(lastName);
-    const validAddress = validInput(address);
-    const validCity = validInput(city);
-    const validMail = validEmail(mail);
-    if(validFirstName && validLastName && validAddress && validCity && validMail){
-        const client_info = [firstName.value, lastName.value, address.value, city.value, mail.value];
-        return client_info;
-    }
-    
-}
+
 const productIdFetch = () =>{
     let items = localStorage.getItem('product');
     items = JSON.parse(items);
@@ -109,92 +120,62 @@ const productIdFetch = () =>{
     }
     return productTab;
 }
-function strRandom(o) {
-    var a = 10,
-        b = 'abcdefghijklmnopqrstuvwxyz',
-        c = '',
-        d = 0,
-        e = ''+b;
-    if (o) {
-      if (o.startsWithLowerCase) {
-        c = b[Math.floor(Math.random() * b.length)];
-        d = 1;
-      }
-      if (o.length) {
-        a = o.length;
-      }
-      if (o.includeUpperCase) {
-        e += b.toUpperCase();
-      }
-      if (o.includeNumbers) {
-        e += '1234567890';
-      }
-    }
-    for (; d < a; d++) {
-      c += e[Math.floor(Math.random() * e.length)];
-    }
-    return c;
-  }
-const generateOrderId = () =>{
-    let orderId;
-    let a = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: 8,
-        startsWithLowerCase: true
-    });
 
-    let b = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: 4
-    });
-
-    let c = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: 4
-    });
-
-    let d = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: 4
-    });
-
-    let e = strRandom({
-        includeUpperCase: true,
-        includeNumbers: true,
-        length: 12
-    });
-
-    orderId = a + "-" + b + "-" + c + "-" + d + "-" + e;
-    return orderId;
-}
-const displayFinal = () => {
-    const client_info = inputFetch();
-    const product = productIdFetch();
-    const orderId = generateOrderId();
-    const contact = {
-        firstName: client_info[0],
-        lastName: client_info[1],
-        address: client_info[2],
-        city: client_info[3],
-        email: client_info[4]
-    }
-    const command = {
-        contact: contact,
-        product: product,
-        orderId: orderId
-    }
-    console.log(command);
-    return command;
+const sendApi = () => {
+    let order = {
+        contact:{
+            firstName: document.querySelector('#firstName').value,
+            lastName: document.querySelector('#lastName').value,
+            address: document.querySelector('#address').value,
+            city: document.querySelector('#city').value,
+            email: document.querySelector('#mail').value
+        },
+        products: productIdFetch()
+    };
+    if(validChamps(order) == true){
+        console.log("taille ", order.products.length);
+        if(order.products.length != 0){
+            const options = {
+                method: "POST",
+                body: JSON.stringify(order),
+                headers: { "Content-Type": "application/json" },
+              };
+              fetch("http://localhost:3000/api/cameras/order", options)
+              .then((response) => response.json())
+              .then((data) => {
+                console.log(data)
+              })
+              .catch((err) => {
+                alert("Il y a eu une erreur : " + err);
+              });
+        }else{
+            alert("Votre panier est vide")
+        }
+    }else{
+        alert("Veuillez remplir tous les champs");
+    };
 }
 const changeNumber = (n, _id) => {
     let items = JSON.parse(localStorage.getItem("product"));
-    items = items.map((item) => item._id === _id ? ({...item, n}) : item);
+    items = items.map((item) => item._id === _id ? ({...item, n}) : item);  // ...item => recup content obj item
     localStorage.setItem("product", JSON.stringify(items));
     displayProduct();
 }
 displayProduct();
-changeNumber(3, "5be9c4c71c9d440000a730e9");
+
+
+const selectValueModif = () => {
+    let items = JSON.parse(localStorage.getItem('product')); 
+    let selects = document.getElementsByTagName("select");
+    console.log("FirstLog SelectValue ", selects);
+    for (let i = 0; i < selects.length; i++) {
+        selects[i].addEventListener("change", (e) => {
+            console.log(e.target.value)
+            console.log(items[i]._id)
+            let number = e.target.value
+            changeNumber(number, items[i]._id);
+            selectValueModif();
+        });
+    }
+}
+selectValueModif();

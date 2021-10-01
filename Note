@@ -69,3 +69,45 @@ de6c            4
 11eb            4
 90a7            4
 85d20f94f19c    12
+
+
+
+
+
+
+
+
+
+
+fonction à garder
+
+
+const sendApi = () => {
+    let order = {
+        contact:{
+            firstName: document.querySelector('#firstName').value,
+            lastName: document.querySelector('#lastName').value,
+            address: document.querySelector('#address').value,
+            city: document.querySelector('#city').value,
+            email: document.querySelector('#mail').value
+        },
+        products: productIdFetch()
+    };
+    let ortest = displayFinal();
+    console.log("test ", ortest);
+    console.log("notest ", order);
+    console.log(ortest === order);
+    const options = {
+        method: "POST",
+        body: JSON.stringify(order),
+        headers: { "Content-Type": "application/json" },
+      };
+      fetch("http://localhost:3000/api/cameras/order", options)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((err) => {
+        alert("Il y a eu une erreur : " + err);
+      });
+}
