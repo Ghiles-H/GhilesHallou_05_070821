@@ -23,10 +23,6 @@
   background: linear-gradient(135deg, #E68F2A, #8F5BFA);
 }
 
-.btn:hover {
-  font-size: 20px !important;
-}
-
 ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -69,8 +65,8 @@ ul li a {
 }
 
 ul li a:hover {
-  text-decoration: none;
-  color: #8F5BFA;
+  text-decoration: underline;
+  color: black;
 }
 
 #shop {

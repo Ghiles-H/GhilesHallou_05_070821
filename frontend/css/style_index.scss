@@ -17,9 +17,7 @@ $ori_purple: #8F5BFA;
     padding-top: 10px!important;
     padding-bottom: 2px!important;
     background: linear-gradient(135deg, $ori_orange, $ori_purple );
-    &:hover{
-        font-size: 20px !important;
-    }
+    
 }
 ul{
     display: flex;
@@ -47,8 +45,8 @@ ul{
             font-size: 25px;
             color: black;
             &:hover{
-                text-decoration: none;
-                color: $ori_purple;
+                text-decoration: underline;
+                color: black;
             }
         }
     }

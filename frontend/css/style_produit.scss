@@ -89,8 +89,8 @@ ul{
             font-size: 25px;
             color: black;
             &:hover{
-                text-decoration: none;
-                color: $ori_orange;
+                text-decoration: underline;
+                color: black;
             }
         }
     }
