@@ -53,6 +53,8 @@ function displayProduct(){      //Fonction permettant de récupérer les donnée
                         <option value="1" ${items[i].n === "1" ? "selected" : ""} >1</option>
                         <option value="2" ${items[i].n === "2" ? "selected" : ""} >2</option>
                         <option value="3" ${items[i].n === "3" ? "selected" : ""} >3</option>
+                        <option value="4" ${items[i].n === "4" ? "selected" : ""} >4</option>
+                        <option value="5" ${items[i].n === "5" ? "selected" : ""} >5</option>
                     </select>
                 </td>
                 <td>${convertPrice(items[i].price)}</td>
@@ -62,7 +64,7 @@ function displayProduct(){      //Fonction permettant de récupérer les donnée
         totalVar += items[i].price * Number(items[i].n);
     }
     productPanier.innerHTML = str;
-
+    localStorage.setItem('totalOrder', convertPrice(totalVar));
     totalPanier.innerHTML = convertPrice(totalVar);
 }
 const validInput = (abc) => {   //Fonction permettant de si un Input est vide ou non
@@ -90,6 +92,7 @@ const validEmail = (mail) => {  //Fonction permettant de vérifier si l'input ma
 }
 const validChamps = (order) => {
     let champs = [order.contact.lastName, order.contact.firstName, order.contact.address, order.contact.city];
+    
     let i = 0;
     let bool = true;
     while(i < 4 && bool == true){
@@ -107,6 +110,9 @@ const validChamps = (order) => {
         bool = false;
     }
     console.log("boolFinal= ",bool);
+    if(bool == false){
+        inputError.style.display = 'block';
+    }
     return bool;
 }
 
@@ -120,9 +126,10 @@ const productIdFetch = () =>{
     }
     return productTab;
 }
+let inputError = document.querySelector('#error_input');
 
-const sendApi = () => {
-    let order = {
+const sendApi = () => {     //Fonction permettant d'envoyer les informations de commande au serveur.
+    let order = {    //Création d'un objet "order" avec les informations rempli par le client ainsi que les id des produits de son panier.
         contact:{
             firstName: document.querySelector('#firstName').value,
             lastName: document.querySelector('#lastName').value,
@@ -132,30 +139,40 @@ const sendApi = () => {
         },
         products: productIdFetch()
     };
-    if(validChamps(order) == true){
+
+    let totalOrder = localStorage.getItem('totalOrder');
+    console.log("totalOrder= ", totalOrder);
+    
+    console.log(inputError);
+    if(order.products.length != 0){ //Vérification du panier, si il est vide => alert pour en informer le client
         console.log("taille ", order.products.length);
-        if(order.products.length != 0){
-            const options = {
+        
+        if(validChamps(order) == true){ //Vérification des information remplie par le client, si une erreur est présente => apparition d'un message pour en informer le client
+            inputError.style.display = 'none';
+            const options = {   //Création d'un objet avec les options de l'api
                 method: "POST",
                 body: JSON.stringify(order),
                 headers: { "Content-Type": "application/json" },
               };
-              fetch("http://localhost:3000/api/cameras/order", options)
+              fetch("http://localhost:3000/api/cameras/order", options) // Appel de l'api avec les options précédament créer.
               .then((response) => response.json())
               .then((data) => {
                 console.log(data)
+                localStorage.setItem('idOrder', data.orderId)
+                localStorage.setItem('mailOrder', order.contact.email)
+                document.location.href = "confirm_page.html"
               })
               .catch((err) => {
                 alert("Il y a eu une erreur : " + err);
               });
         }else{
-            alert("Votre panier est vide")
+            inputError.style.display = 'block';
         }
     }else{
-        alert("Veuillez remplir tous les champs");
+        alert("Votre panier est vide");
     };
 }
-const changeNumber = (n, _id) => {
+const changeNumber = (n, _id) => {      // Fonction permettant de créer une valeur de quantité et l'id d'un produit contenu dans le localstorage
     let items = JSON.parse(localStorage.getItem("product"));
     items = items.map((item) => item._id === _id ? ({...item, n}) : item);  // ...item => recup content obj item
     localStorage.setItem("product", JSON.stringify(items));
@@ -164,7 +181,7 @@ const changeNumber = (n, _id) => {
 displayProduct();
 
 
-const selectValueModif = () => {
+const selectValueModif = () => {        // Fonction permettant de récupérer la valeur de l'option "select" et de l'appliquer à la fonction "changeNumber" à chaque event "change" d'un "select"
     let items = JSON.parse(localStorage.getItem('product')); 
     let selects = document.getElementsByTagName("select");
     console.log("FirstLog SelectValue ", selects);

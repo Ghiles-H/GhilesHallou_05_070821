@@ -1,0 +1,59 @@
+/* Variables colors */
+$ori_pink: #F3E9F0;
+$ori_orange: #E68F2A;
+$ori_purple: #8F5BFA;
+/* Variables colors - END */
+
+.jumbotron{
+    background-color: $ori_pink !important;
+    margin-top: 32px;
+    border-radius: 25px !important;
+    .title, .title_com{
+        text-align: center !important;
+    }
+}
+header{
+    background-color: $ori_pink;
+}
+ul{
+    position: relative;
+    li{
+        display: inline;
+        position: absolute;
+        a{
+            font-size: 25px;
+            color: black;
+            &:hover{
+                text-decoration: underline;
+                color: black;
+                
+            }
+        }
+    }
+} 
+#shop{
+    left: 10rem;
+}
+
+.recap{
+    border: black 1px none;
+    border-radius: 25px;
+    background-color: $ori_pink;
+    padding-top: 15px;
+    padding-left: 50px;
+    padding-bottom: 15px;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-around; */
+    .recap_Confirm{
+        color: black;
+        padding-left: 50px;
+        p{
+            font-size: 20px;
+            span{
+                font-weight: bold;
+            }
+        }
+        
+    }
+}

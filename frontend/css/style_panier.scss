@@ -10,6 +10,10 @@ $ori_purple: #8F5BFA;
     border-radius: 25px;
     padding: 1.5rem;
     background-color: $ori_pink;
+    #error_input{
+        color: red;
+        display: none;
+    }
 }
 form{
     display: flex;

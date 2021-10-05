@@ -1,1 +1,64 @@
-/* No CSS *//*# sourceMappingURL=style_confirm.css.map */
+/* Variables colors */
+/* Variables colors - END */
+.jumbotron {
+  background-color: #F3E9F0 !important;
+  margin-top: 32px;
+  border-radius: 25px !important;
+}
+
+.jumbotron .title, .jumbotron .title_com {
+  text-align: center !important;
+}
+
+header {
+  background-color: #F3E9F0;
+}
+
+ul {
+  position: relative;
+}
+
+ul li {
+  display: inline;
+  position: absolute;
+}
+
+ul li a {
+  font-size: 25px;
+  color: black;
+}
+
+ul li a:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+#shop {
+  left: 10rem;
+}
+
+.recap {
+  border: black 1px none;
+  border-radius: 25px;
+  background-color: #F3E9F0;
+  padding-top: 15px;
+  padding-left: 50px;
+  padding-bottom: 15px;
+  /* display: flex;
+    flex-direction: column;
+    justify-content: space-around; */
+}
+
+.recap .recap_Confirm {
+  color: black;
+  padding-left: 50px;
+}
+
+.recap .recap_Confirm p {
+  font-size: 20px;
+}
+
+.recap .recap_Confirm p span {
+  font-weight: bold;
+}
+/*# sourceMappingURL=style_confirm.css.map */

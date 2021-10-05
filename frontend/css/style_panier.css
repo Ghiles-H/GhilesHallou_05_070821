@@ -8,6 +8,11 @@
   background-color: #F3E9F0;
 }
 
+#formulaire #error_input {
+  color: red;
+  display: none;
+}
+
 form {
   display: -webkit-box;
   display: -ms-flexbox;
