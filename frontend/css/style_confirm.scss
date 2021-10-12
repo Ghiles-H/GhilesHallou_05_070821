@@ -7,7 +7,7 @@ $ori_purple: #8F5BFA;
 .jumbotron{
     background-color: $ori_pink !important;
     margin-top: 32px;
-    border-radius: 25px !important;
+    border-radius: 10px !important;
     .title, .title_com{
         text-align: center !important;
     }
@@ -37,7 +37,7 @@ ul{
 
 .recap{
     border: black 1px none;
-    border-radius: 25px;
+    border-radius: 10px;
     background-color: $ori_pink;
     padding-top: 15px;
     padding-left: 50px;

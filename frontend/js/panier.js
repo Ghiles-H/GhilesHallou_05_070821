@@ -3,6 +3,7 @@ const totalPanier = document.querySelector('#total');
 let hiddenBtn = document.querySelector('#ref_id_btn');
 const url_api = 'http://localhost:3000/api/cameras/order';
 let nbn = 1;
+
 function convertPrice(nbD) { //Fonction permettant de mettre un nombre sous le format "XXX,XX €"
     let nbC = nbD / 100;
     let nbF = nbC.toFixed(2);
@@ -24,7 +25,6 @@ contentPanier();
 const deleteItem = () => {      //Fonction permettant de supprimer des élémants du localstorage et de recharger la page
     let items = localStorage.getItem("product");
     items = JSON.parse(items);
-    console.log(items[hiddenBtn.value]);
     items.splice(hiddenBtn.value, 1);
     localStorage.setItem('product', JSON.stringify(items));
 }
@@ -40,12 +40,14 @@ function testConfirmDelete()  {
 //.append
 
 function displayProduct(){      //Fonction permettant de récupérer les données des articles ajoutés au localstorage et de les afficher sur la page du panier
-    let items = JSON.parse(localStorage.getItem('product'));
+    let items = [];
+    if(localStorage.getItem('product') != null){
+        items = JSON.parse(localStorage.getItem('product'));
+    }
     let totalVar = 0;
     items = items.map((item) => item.n ? item : ({...item, n: 1}));
     let str = "";
     for(let i = 0; i < items.length; i++){
-        console.log(typeof items[i].n)
         str += `
             <tr>
                 <td>${items[i].name}</td>
@@ -68,57 +70,79 @@ function displayProduct(){      //Fonction permettant de récupérer les donnée
     totalPanier.innerHTML = convertPrice(totalVar);
 }
 const validInput = (abc) => {   //Fonction permettant de si un Input est vide ou non
-    if(abc == ""){
+    if(abc.value == ""){
+        abc.style.borderColor = "red";
+        abc.style.borderWidth = "2px"
         return false;
     }else{
+        abc.style.borderColor = "black";
+        abc.style.borderWidth = "1px"
         return true;
     }
 }
 
-const validEmailA = (mail) => {
-    console.log("log validEmail= ",/\S+@\S+\. \S+/.test(mail));
+const validEmail = (mail) => {  //Fonction permettant de vérifier si l'input mail entré par le user possède une syntax valide
     return /\S+@\S+\.\S+/.test(mail);
 }
-const validEmail = (mail) => {  //Fonction permettant de vérifier si l'input mail entré par le user contient un "@" et un "."
-    if(validInput(mail)){
-        if(mail.includes("@") && mail.includes(".")){
-            return true
-        }else{
-            return false
-        }
-    }else{
-        return false
+const validPhone = (num) => {
+    if(num.indexOf('+33') != -1){
+        num = num.replace('+33', '0');
     }
+    var re = /^0[1-7]\d{8}$/;
+    return re.test(num);
+}
+const validZipCode = (num) => {
+    var re = /\d{5}$/;
+    return re.test(num);
 }
 const validChamps = (order) => {
     let champs = [order.contact.lastName, order.contact.firstName, order.contact.address, order.contact.city];
-    
+    let phone = document.querySelector('#phone');
+    let zipCode = document.querySelector('#zipCode');
     let i = 0;
     let bool = true;
-    while(i < 4 && bool == true){
+    while(i < 4){
         if(validInput(champs[i]) == true){
             console.log(i + " " + champs[i]);
             i++
         }else{
+            i++;
             bool = false;
         }
     }
-    console.log("boolNoMail= ",bool);
-    console.log("mailInput= ", order.contact.email);
-    console.log("mail= ", validEmail(order.contact.email));
-    if(bool == true && validEmail(order.contact.email) == false){
+    if(validPhone(phone.value) == true){
+        phone.style.borderColor = "black";
+        phone.style.borderWidth = "1px";
+    }else{
         bool = false;
+        phone.style.borderColor = "red";
+        phone.style.borderWidth = "2px";
     }
-    console.log("boolFinal= ",bool);
-    if(bool == false){
-        inputError.style.display = 'block';
+    if(validZipCode(zipCode.value) == true){
+        zipCode.style.borderColor = "black";
+        zipCode.style.borderWidth = "1px";
+    }else{
+        bool = false;
+        zipCode.style.borderColor = "red";
+        zipCode.style.borderWidth = "2px";
+    }
+    if(validEmail(order.contact.email.value) == false){
+        bool = false;
+        order.contact.email.style.borderColor = "red";
+        order.contact.email.style.borderWidth = "2px";
+
+    }else{
+        order.contact.email.style.borderColor = "black";
+        order.contact.email.style.borderWidth = "1px";
     }
     return bool;
 }
 
 const productIdFetch = () =>{
-    let items = localStorage.getItem('product');
-    items = JSON.parse(items);
+    let items = [];
+    if(localStorage.getItem('product') != null){
+        items = JSON.parse(localStorage.getItem('product'));
+    }
     const productTab = [];
     let newProduct;
     for (let i = 0; i < items.length; i++){
@@ -129,25 +153,30 @@ const productIdFetch = () =>{
 let inputError = document.querySelector('#error_input');
 
 const sendApi = () => {     //Fonction permettant d'envoyer les informations de commande au serveur.
+    let orderTest = {    //Création d'un objet "orderTest" avec les informations rempli par le client pour les valider.
+        contact:{
+            firstName: document.querySelector('#firstName'),
+            lastName: document.querySelector('#lastName'),
+            address: document.querySelector('#address'),
+            city: document.querySelector('#city'),
+            email: document.querySelector('#mail')
+        },
+    };
     let order = {    //Création d'un objet "order" avec les informations rempli par le client ainsi que les id des produits de son panier.
         contact:{
-            firstName: document.querySelector('#firstName').value,
-            lastName: document.querySelector('#lastName').value,
-            address: document.querySelector('#address').value,
-            city: document.querySelector('#city').value,
-            email: document.querySelector('#mail').value
+            firstName: orderTest.contact.firstName.value,
+            lastName: orderTest.contact.lastName.value,
+            address: orderTest.contact.address.value,
+            city: orderTest.contact.city.value,
+            email: orderTest.contact.email.value
         },
         products: productIdFetch()
     };
-
-    let totalOrder = localStorage.getItem('totalOrder');
-    console.log("totalOrder= ", totalOrder);
     
-    console.log(inputError);
+    let totalOrder = localStorage.getItem('totalOrder');
     if(order.products.length != 0){ //Vérification du panier, si il est vide => alert pour en informer le client
-        console.log("taille ", order.products.length);
         
-        if(validChamps(order) == true){ //Vérification des information remplie par le client, si une erreur est présente => apparition d'un message pour en informer le client
+        if(validChamps(orderTest) == true){ //Vérification des information remplie par le client, si une erreur est présente => apparition d'un message pour en informer le client
             inputError.style.display = 'none';
             const options = {   //Création d'un objet avec les options de l'api
                 method: "POST",
@@ -157,7 +186,6 @@ const sendApi = () => {     //Fonction permettant d'envoyer les informations de 
               fetch("http://localhost:3000/api/cameras/order", options) // Appel de l'api avec les options précédament créer.
               .then((response) => response.json())
               .then((data) => {
-                console.log(data)
                 localStorage.setItem('idOrder', data.orderId)
                 localStorage.setItem('mailOrder', order.contact.email)
                 document.location.href = "confirm_page.html"
@@ -184,11 +212,8 @@ displayProduct();
 const selectValueModif = () => {        // Fonction permettant de récupérer la valeur de l'option "select" et de l'appliquer à la fonction "changeNumber" à chaque event "change" d'un "select"
     let items = JSON.parse(localStorage.getItem('product')); 
     let selects = document.getElementsByTagName("select");
-    console.log("FirstLog SelectValue ", selects);
     for (let i = 0; i < selects.length; i++) {
         selects[i].addEventListener("change", (e) => {
-            console.log(e.target.value)
-            console.log(items[i]._id)
             let number = e.target.value
             changeNumber(number, items[i]._id);
             selectValueModif();
