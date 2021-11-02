@@ -92,7 +92,7 @@ const validPhone = (num) => {
     return re.test(num);
 }
 const validZipCode = (num) => {
-    var re = /\d{5}$/;
+    var re = /^\d{5}$/;
     return re.test(num);
 }
 const validChamps = (order) => {

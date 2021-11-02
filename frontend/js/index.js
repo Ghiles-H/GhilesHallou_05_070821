@@ -52,9 +52,10 @@ function createProduct(number, data){ // Fonction qui crée un bloc produit, "nu
         `;
 }
 
-function createProductAll(loop, data){    //Fonction permettant de d'appeler un nombre de fois "loop" la fonction "createProduct"
+function createProductAll(data){    //Fonction permettant de d'appeler un nombre de fois "data.length" la fonction "createProduct"
     var i = 0;
-    while(i < loop) {
+    console.log("data taille= ", data.length);
+    while(i < data.length) {
         createProduct(i, data);
         i++;
     }
@@ -62,4 +63,4 @@ function createProductAll(loop, data){    //Fonction permettant de d'appeler un 
 fetch(url_api)
     .catch((err) => alert("Désolé il y a eu une erreur, la voici: " + err))
     .then(res => res.json())
-    .then(data => createProductAll(5, data))
+    .then(data => createProductAll(data))

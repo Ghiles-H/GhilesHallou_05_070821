@@ -87,7 +87,7 @@ const addItem = (data) => {
     localStorage.setItem('product', JSON.stringify(items));
 }
 
-// Fonction appeller au click du bouton "Ajouter au panier" qui appel l'api et ajoute les données de celle-ci à la fonction "addItem"
+// Fonction appelée au click du bouton "Ajouter au panier" qui appel l'api et ajoute les données de celle-ci à la fonction "addItem"
 function sendLocalStorage(){
     fetch(url_api_id)
         .then(res => res.json())
