@@ -1,0 +1,102 @@
+/* Variables colors */
+$ori_pink: #F3E9F0;
+$ori_orange: #E68F2A;
+$ori_purple: #8F5BFA;
+/* Variables colors - END */
+#test-bg{
+    background-color: $ori_pink;
+}
+#product{
+    border: 1px none blue;
+    height: 350px;
+    border-radius: 10px;
+    margin-top: 25px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $ori_pink;
+    
+    #product_img{
+    
+        width: 500px;
+    
+    }
+    #imageProduct{
+        //border-radius: 25px;
+        border: 25px none $ori_pink;
+        width: 450px;
+        height: 300px;
+        margin: 25px;
+    }
+    #product_info{
+        border: 5px none green;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        margin: 10px;
+
+        #nameProduct{
+            text-align: center;
+        }
+        #descrip_lenses{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            margin-left: 1rem;
+            #descriptionProduct{
+                width: 50%;
+            }
+            #product_lenses{
+                margin-left: 2.5rem;
+                #lenses_link{
+                    color: black;
+                    &:hover{
+                        color: $ori_purple;
+                    }
+                }
+            }
+        }
+        
+        
+        #product_foot{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            
+            #priceProduct{
+                font-weight: bold;
+                font-size: xx-large;
+            }
+            .add_shop{
+                background: linear-gradient(135deg, $ori_orange, $ori_purple );
+                width: 195px;
+                height: 50px;
+            }
+        }
+    }
+    
+}
+
+header{
+    background-color: $ori_pink;
+}
+ul{
+    position: relative;
+    li{
+        display: inline;
+        position: absolute;
+        a{
+            font-size: 25px;
+            color: black;
+            &:hover{
+                text-decoration: underline;
+                color: black;
+            }
+        }
+    }
+} 
+
+
+#shop{
+    left: 10rem;
+}

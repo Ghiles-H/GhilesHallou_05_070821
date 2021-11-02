@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+
+        <meta charset="utf-8">
+        <link rel ="stylesheet" href="/frontend/css/style_produit.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        
+        <!-- Font-awesome link -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        
+        <title>Orinoco | Produit</title>
+    </head>
+    <body>
+        <!-- Header -->
+        <header>
+            <div class="container">
+                <div class="row">
+                    <nav class="col navbar navbar-expand-lg navbar-dark">
+                        <a href="/index.html">
+                            <img src="/backend/images/ori_logo.png" width="200" height="100" alt="Logo Site">
+                        </a>
+                        <ul>
+                            <li id="accueil"><a href="/index.html">Accueil</a></li>
+                            <li id="shop"><a href="/frontend/html/panier.html" id="shop_link">Panier</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <!-- Header - END -->
+        <!-- Contenu de la page -->
+        <section class="container">
+            
+            <!-- Produits -->
+            <div class="product" id="product">  <!-- Blue -->
+                <div id="product_img">
+                    
+                </div>   <!-- Red -->
+                <div id="product_info">
+                    <div id="descrip_lenses">
+                        <div id="product_lenses">
+                            <label for="lenses_select">Choisissez votre lentille :</label>
+                            </br>
+                            <select name="lenses" id="lenses_select">
+                                <option value="" id="select_option">--Please choose an option--</option>
+                            </select>
+                            <p id="lenses_only">Si vous désirez uniquement les lentilles, <a href="#" id="lenses_link">cliquez ici</a>.</p>
+                        </div>
+                    </div>
+                    <div id="product_foot">
+                        <button class="add_shop btn btn-secondary" onclick="sendLocalStorage()"> Ajouter au panier</button>
+                    </div>
+                    
+                </div>    <!-- Green -->
+                
+            </div>
+            
+        </section>
+        <!-- Script Javascript -->
+        <script src="/frontend/js/product_page.js"></script>
+    </body>
+</html>
