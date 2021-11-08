@@ -69,7 +69,7 @@ function displayProduct(){      //Fonction permettant de récupérer les donnée
     localStorage.setItem('totalOrder', convertPrice(totalVar));
     totalPanier.innerHTML = convertPrice(totalVar);
 }
-const validInput = (abc) => {   //Fonction permettant de si un Input est vide ou non
+const validInput = (abc) => {   //Fonction permettant de vérifier si un Input est vide ou non
     if(abc.value == ""){
         abc.style.borderColor = "red";
         abc.style.borderWidth = "2px"
@@ -84,12 +84,12 @@ const validInput = (abc) => {   //Fonction permettant de si un Input est vide ou
 const validEmail = (mail) => {  //Fonction permettant de vérifier si l'input mail entré par le user possède une syntax valide
     return /\S+@\S+\.\S+/.test(mail);
 }
-const validPhone = (num) => {
-    if(num.indexOf('+33') != -1){
-        num = num.replace('+33', '0');
+const validPhone = (phone) => {
+    if(phone.indexOf('+33') != -1){
+        phone = phone.replace('+33', '0');
     }
     var re = /^0[1-7]\d{8}$/;
-    return re.test(num);
+    return re.test(phone);
 }
 const validZipCode = (num) => {
     var re = /\d{5}$/;
